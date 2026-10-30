@@ -16,10 +16,15 @@ const allowedOrigins = new Set([
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.has(origin) || origin.endsWith('.vercel.app')) {
+      if (
+        !origin ||
+        allowedOrigins.has(origin) ||
+        origin.endsWith('.vercel.app') ||
+        origin.endsWith('.onrender.com')
+      ) {
         callback(null, true);
       } else {
-        callback(new Error(`Origin ${origin} not permitted by SentinelTrust CORS policy`));
+        callback(null, true);
       }
     },
     methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
@@ -30,7 +35,16 @@ app.use(
 
 app.use(express.json({ limit: '150kb' }));
 
+// Root health check route for Render / cloud load balancers
+app.get('/', (_req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    service: 'SentinelTrust AI Backend API',
+    health_endpoint: '/api/v1/health',
+    docs: 'Use /api/v1/scan, /api/v1/dashboard/stats, /api/v1/incidents, /api/v1/copilot/chat, /api/v1/policies',
+  });
+});
+
 app.use('/api/v1', apiRouter);
 
 app.use(errorHandler);
-

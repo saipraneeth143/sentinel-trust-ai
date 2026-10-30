@@ -4,13 +4,13 @@
   "private": true,
   "description": "SentinelTrust AI - Enterprise Security, Privacy & Trust Intelligence Platform",
   "scripts": {
-    "install:all": "npm --prefix backend install && npm --prefix frontend install",
-    "build": "npm --prefix backend install && npm --prefix backend run build",
+    "install:all": "npm --prefix backend install --include=dev && npm --prefix frontend install --include=dev",
+    "build": "npm --prefix backend install --include=dev && npm --prefix backend run build",
     "start": "node backend/dist/index.js",
     "dev:backend": "npm --prefix backend run dev",
     "dev:frontend": "npm --prefix frontend run dev"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=20.0.0"
   }
 }
