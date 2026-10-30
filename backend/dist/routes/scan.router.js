@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.scanRouter = void 0;
+const express_1 = require("express");
+const scan_controller_1 = require("../controllers/scan.controller");
+const rateLimiter_1 = require("../middlewares/rateLimiter");
+const validateRequest_1 = require("../middlewares/validateRequest");
+const scan_schema_1 = require("../schemas/scan.schema");
+exports.scanRouter = (0, express_1.Router)();
+exports.scanRouter.post('/', rateLimiter_1.scanRateLimiter, (0, validateRequest_1.validateBody)(scan_schema_1.ScanRequestSchema), scan_controller_1.handleScanPayload);

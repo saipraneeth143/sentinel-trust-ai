@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
+    "postinstall": "tsc",
+    "prestart": "tsc",
     "start": "node dist/index.js",
     "db:migrate": "psql $DATABASE_URL -f sql/schema.sql"
   },

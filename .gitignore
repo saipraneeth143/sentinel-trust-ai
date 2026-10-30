@@ -2,8 +2,8 @@
 node_modules/
 .pnpm-store/
 
-# Build outputs
-dist/
+# Build outputs (keep backend/dist tracked for zero-fail Render deploys)
+frontend/dist/
 build/
 .vercel/
 
@@ -26,4 +26,3 @@ logs/
 .DS_Store
 .vscode/
 .idea/
-

@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.apiRouter = void 0;
+const express_1 = require("express");
+const dashboard_controller_1 = require("../controllers/dashboard.controller");
+const rateLimiter_1 = require("../middlewares/rateLimiter");
+const copilot_router_1 = require("./copilot.router");
+const incident_router_1 = require("./incident.router");
+const policy_router_1 = require("./policy.router");
+const scan_router_1 = require("./scan.router");
+exports.apiRouter = (0, express_1.Router)();
+exports.apiRouter.use(rateLimiter_1.apiRateLimiter);
+exports.apiRouter.get('/health', dashboard_controller_1.handleHealthCheck);
+exports.apiRouter.get('/dashboard/stats', dashboard_controller_1.handleGetDashboardStats);
+exports.apiRouter.use('/scan', scan_router_1.scanRouter);
+exports.apiRouter.use('/incidents', incident_router_1.incidentRouter);
+exports.apiRouter.use('/copilot', copilot_router_1.copilotRouter);
+exports.apiRouter.use('/policies', policy_router_1.policyRouter);

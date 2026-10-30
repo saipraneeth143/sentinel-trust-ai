@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.policyRouter = void 0;
+const express_1 = require("express");
+const policy_controller_1 = require("../controllers/policy.controller");
+const validateRequest_1 = require("../middlewares/validateRequest");
+const scan_schema_1 = require("../schemas/scan.schema");
+exports.policyRouter = (0, express_1.Router)();
+exports.policyRouter.get('/', policy_controller_1.handleGetPolicies);
+exports.policyRouter.post('/', (0, validateRequest_1.validateBody)(scan_schema_1.PolicyUpsertSchema), policy_controller_1.handleUpsertPolicy);

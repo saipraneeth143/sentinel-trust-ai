@@ -5,7 +5,9 @@
   "description": "SentinelTrust AI - Enterprise Security, Privacy & Trust Intelligence Platform",
   "scripts": {
     "install:all": "npm --prefix backend install --include=dev && npm --prefix frontend install --include=dev",
+    "postinstall": "npm --prefix backend install --include=dev && npm --prefix backend run build",
     "build": "npm --prefix backend install --include=dev && npm --prefix backend run build",
+    "prestart": "npm --prefix backend run build",
     "start": "node backend/dist/index.js",
     "dev:backend": "npm --prefix backend run dev",
     "dev:frontend": "npm --prefix frontend run dev"
